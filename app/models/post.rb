@@ -12,4 +12,9 @@ class Post < ActiveRecord::Base
   def to_param
     [id, title.parameterize].join('-')
   end
+
+  def parse_markdown!
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    self.html_text = markdown.render(markdown_text)
+  end
 end

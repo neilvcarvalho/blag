@@ -90,4 +90,16 @@ RSpec.describe Post, :type => :model do
       expect(post.to_param).to eq "#{post.id}-a-day-in-my-life"
     end
   end
+
+  describe '#parse_markdown!' do
+    subject(:post) { create(:post, markdown_text: File.read(Rails.root.join('spec/fixtures/markdown_post.md'))) }
+
+    before { post.parse_markdown! }
+
+    it 'renders a Markdown template into HTML' do
+      expect(post.html_text).to include('<h1>This is a sample post</h1>')
+      expect(post.html_text).to include('<p>This section is expected to render a paragraph</p>')
+      expect(post.html_text).to include('<li>First list item</li>')
+    end
+  end
 end

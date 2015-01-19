@@ -1,0 +1,7 @@
+<% content_for(:title) { "Neil Carvalho - #{@post.title}" }  %>
+
+<h2><%= @post.title %></h2>
+
+<article>
+  <%= raw @post.html_text %>
+</article>
