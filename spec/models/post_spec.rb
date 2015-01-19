@@ -13,6 +13,47 @@ RSpec.describe Post, :type => :model do
     end
   end
 
+  describe 'scopes' do
+    before do
+      now = Time.zone.local(2014, 10, 1, 15, 30, 45)
+      travel_to(now)
+    end
+
+    let!(:old_post) { create(:post, :published, published_at: Time.zone.now - 1.year) }
+    let!(:recent_post) { create(:post, :published, published_at: Time.zone.now)}
+    let!(:unpublished_post) { create(:post, :published, published_at: Time.zone.now + 1.day)}
+
+    after { travel_back }
+
+    describe '.published' do
+      it 'returns posts published before now' do
+        expect(Post.published).to include(old_post)
+      end
+
+      it 'returns posts published right now' do
+        expect(Post.published).to include(recent_post)
+      end
+
+      it 'does not return posts scheduled to the future' do
+        expect(Post.published).to_not include(unpublished_post)
+      end
+    end
+
+    describe '.scheduled' do
+      it 'does not return posts published before now' do
+        expect(Post.scheduled).to_not include(old_post)
+      end
+
+      it 'does not return posts published right now' do
+        expect(Post.scheduled).to_not include(recent_post)
+      end
+
+      it 'returns posts scheduled to the future' do
+        expect(Post.scheduled).to include(unpublished_post)
+      end
+    end
+  end
+
   describe '#published?' do
     before do
       now = Time.zone.local(2014, 10, 1, 15, 30, 45)
@@ -43,7 +84,7 @@ RSpec.describe Post, :type => :model do
   end
 
   describe '#to_param' do
-    subject(:post) { create(Post, title: 'A day in my life')}
+    subject(:post) { create(:post, title: 'A day in my life')}
 
     it 'returns its internal id and a parameterized title' do
       expect(post.to_param).to eq "#{post.id}-a-day-in-my-life"
