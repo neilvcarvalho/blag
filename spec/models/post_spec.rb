@@ -41,4 +41,12 @@ RSpec.describe Post, :type => :model do
       it { should_not be_published }
     end
   end
+
+  describe '#to_param' do
+    subject(:post) { create(Post, title: 'A day in my life')}
+
+    it 'returns its internal id and a parameterized title' do
+      expect(post.to_param).to eq "#{post.id}-a-day-in-my-life"
+    end
+  end
 end

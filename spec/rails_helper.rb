@@ -19,7 +19,16 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # Test FactoryGirl factories first
+  config.before(:suite) do
+    FactoryGirl.lint
+  end
+
+  # Includes Rails testing time helpers, such as travel_to and travel_back
   config.include ActiveSupport::Testing::TimeHelpers
+
+  # Does not require "FactoryGirl" when calling its class methods
+  config.include FactoryGirl::Syntax::Methods
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

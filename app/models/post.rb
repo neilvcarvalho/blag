@@ -5,4 +5,8 @@ class Post < ActiveRecord::Base
   def published?
     published_at >= Time.zone.now if published_at
   end
+
+  def to_param
+    [id, title.parameterize].join('-')
+  end
 end
