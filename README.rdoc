@@ -1,3 +1,3 @@
-[![Code Climate](https://codeclimate.com/github/neilvilela/blag/badges/gpa.svg)](https://codeclimate.com/github/neilvilela/blag)
-[![Test Coverage](https://codeclimate.com/github/neilvilela/blag/badges/coverage.svg)](https://codeclimate.com/github/neilvilela/blag)
-[![Build Status](https://travis-ci.org/neilvilela/blag.svg?branch=master)](https://travis-ci.org/neilvilela/blag)
+{<img src="https://codeclimate.com/github/neilvilela/blag/badges/gpa.svg" />}[https://codeclimate.com/github/neilvilela/blag]
+{<img src="https://codeclimate.com/github/neilvilela/blag/badges/coverage.svg" />}[https://codeclimate.com/github/neilvilela/blag]
+{<img src="https://travis-ci.org/neilvilela/blag.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/neilvilela/blag]
