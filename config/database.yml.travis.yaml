@@ -1,0 +1,6 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: blag_travis_test
+  user: postgres
+  pool: 5
