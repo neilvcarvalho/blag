@@ -16,5 +16,15 @@ class Post < ActiveRecord::Base
   def parse_markdown!
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     self.html_text = markdown.render(markdown_text)
+
+    self
+  end
+
+  def publish!(publishing_date = DateTime.current)
+    parse_markdown!
+    self.published_at = publishing_date
+    self.save!
+
+    self
   end
 end

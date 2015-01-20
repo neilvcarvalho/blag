@@ -51,6 +51,10 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+group :development do
+   gem 'guard-rspec', require: false
+end
+
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false

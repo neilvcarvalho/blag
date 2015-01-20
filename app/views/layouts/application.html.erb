@@ -3,16 +3,17 @@
 <head>
   <title><%= yield(:title) || 'Neil Carvalho' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='http://fonts.googleapis.com/css?family=Bitter:400,400italic,700' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
-    <h1>Neil Carvalho</h1>
+    <h1><%= link_to 'Neil Carvalho', root_path %></h1>
     <h2>Desenvolvimento, lifehacks e outras coisas</h2>
   </header>
 
-<%= yield %>
+  <%= yield %>
 
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

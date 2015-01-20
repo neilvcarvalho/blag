@@ -94,12 +94,46 @@ RSpec.describe Post, :type => :model do
   describe '#parse_markdown!' do
     subject(:post) { create(:post, markdown_text: File.read(Rails.root.join('spec/fixtures/markdown_post.md'))) }
 
-    before { post.parse_markdown! }
-
     it 'renders a Markdown template into HTML' do
+      post.parse_markdown!
       expect(post.html_text).to include('<h1>This is a sample post</h1>')
-      expect(post.html_text).to include('<p>This section is expected to render a paragraph</p>')
-      expect(post.html_text).to include('<li>First list item</li>')
+    end
+
+    it 'returns self' do
+      expect(post.parse_markdown!).to eq post
+    end
+  end
+
+  describe '#publish!(DateTime.now)' do
+    subject(:post) { create(:post, markdown_text: File.read(Rails.root.join('spec/fixtures/markdown_post.md'))) }
+
+    before do
+      now = Time.zone.local(2014, 10, 1, 15, 30, 45)
+      travel_to(now)
+
+      allow(post).to receive(:parse_markdown!).and_return(post)
+    end
+
+    after { travel_back }
+
+    it 'returns self' do
+      expect(post.publish!).to eq post
+    end
+
+    context 'when an argument is passed' do
+      it 'sets the publishing date to the argument' do
+        yesterday = Time.zone.now - 1.day
+
+        expect { post.publish!(yesterday) }.to change { post.published_at }.
+          to(yesterday)
+      end
+    end
+
+    context 'when an argument is not passed' do
+      it 'sets the publishing date to the current DateTime' do
+        expect { post.publish! }.to change { post.published_at }.
+          to(Time.zone.now)
+      end
     end
   end
 end
