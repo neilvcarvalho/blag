@@ -8,8 +8,8 @@ describe 'posts/show.html.erb' do
     render
   end
 
-  it 'sets content_for(:title) as "Neil Carvalho - Post title' do
-    expect(view.content_for(:title)).to eq "Neil Carvalho - #{post.title}"
+  it 'sets content_for(:title) as the post title' do
+    expect(view.content_for(:title)).to eq post.title
   end
 
   it 'renders the unescaped HTML text' do

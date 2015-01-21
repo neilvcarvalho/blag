@@ -73,4 +73,9 @@ RSpec.describe PostsController, :type => :controller do
       it { should render_template(:new) }
     end
   end
+
+  describe 'PATCH update' do
+    context 'when the post persisted (is valid)'
+    context 'when the post did not persist (is invalid)'
+  end
 end

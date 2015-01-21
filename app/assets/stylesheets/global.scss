@@ -10,6 +10,12 @@ body {
   }
 }
 
+.container {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 header {
   font-size: 20px;
   border-bottom: solid 1px #ddd;
@@ -17,6 +23,23 @@ header {
   h1, h2 {
     margin: 0.2em 0;
   }
+
+  h1 {
+    font-size: 2.2em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.title {
+  text-align: center;
+
 }
 
 article {
